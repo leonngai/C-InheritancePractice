@@ -58,6 +58,9 @@ public:
         return Point::calculateDistance(the_shape.origin, other.origin);
     }
 
+    virtual double area() = 0;
+    virtual double perimeter() = 0;
+
 protected:
     Point origin;
     const char* shapeName;
@@ -84,6 +87,7 @@ class Rectangle: public Square{
 private:
     double side_b;
 public:
+    Rectangle() = default;
     Rectangle(double x, double y, double side_a, double side_b, const char *inputName);
     Rectangle(const Rectangle& source);
     Rectangle& operator =(const Rectangle& source);
@@ -102,6 +106,7 @@ class Circle: public Shape{
 private:
     double radius;
 public:
+    Circle() = default;
     Circle(double x, double y, double radius, const char *inputName);
 
     double area();
@@ -110,6 +115,20 @@ public:
 
     double get();
     void set(double radius);
+
+};
+
+class CornerCut: public Rectangle, Circle{
+
+public:
+    CornerCut(double x, double y, double width, double length, double radius, const char *inputName);
+
+    double area();
+    double perimeter();
+    void display();
+
+    const char* getName() const;
+    double distance(Shape& other);
 
 };
 
