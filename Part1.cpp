@@ -185,7 +185,42 @@ void Circle::set(double radius) {
     this->radius = radius;
 };
 
+CornerCut::CornerCut(double x, double y, double width, double length, double radius, const char *inputName) : Circle(x, y, radius, inputName), Rectangle(x, y, width, length, inputName){
+    if (radius > width || radius > length) {
+        cout << "Error! The radius is greater than the sides of the rectangle which is not allowed.\nProgram is quitting now." << endl;
+        std::_Exit(EXIT_FAILURE);
+    }
+}
+
+double CornerCut::area() {
+// area can be found via total rectangle area - (1/4) * circle area
+    double area = Rectangle::area();
+    area -= (0.25 * Circle::area());
+    return area;
+}
+
+double CornerCut::perimeter() {
+// perimeter can be found via total rectangle perimeter - (2 * radius) + (1/4) * circle perimeter
+    double perimeter = Rectangle::perimeter();
+    perimeter -= (2 * Circle::get());
+    perimeter += (0.25 * Circle::perimeter());
+    return perimeter;
+}
+void CornerCut::display(){
+    cout << "CornerCut Name: " << Circle::getName() << endl;
+    Circle::origin.display();
+    cout << "Width: " << Rectangle::getSideA() << endl;
+    cout << "Length: " << Rectangle::getSideB() << endl;
+    cout << "Radius of the cut: " << Circle::get() << endl;
+
+}
+
+const char* CornerCut::getName() const { return Circle::getName(); }
+double CornerCut::distance(Shape& other) { return Circle::distance(other); }
+
+
 void GraphicsWorld::run() {
+    // Part 1
     cout << "\nThis program has been written by: Leon Ngai." ;
     cout << "\nTesting Functions in class Point:" <<endl;
     Point m (6, 8);
@@ -226,7 +261,42 @@ void GraphicsWorld::run() {
     cout << "the area of " << c.getName() <<" is: "<< c.area() << endl;
     cout << "the perimeter of " << c.getName() << " is: "<< c.perimeter() << endl;
     d = a.distance(c);
-    cout << "\nThe distance between rectangle a and circle c is: " <<d;
+    cout << "\nThe distance between rectangle a and circle c is: " <<d << endl;
+
+//Part 2
+    CornerCut rc (6, 5, 10, 12, 9, "CornerCut rc");
+    rc.display();
+    cout << "the area of " << rc.getName() <<" is: "<< rc.area() << endl;
+    cout << "the perimeter of " << rc.getName() << " is: "<< rc.perimeter() << endl;
+    d = rc.distance(c);
+    cout << "\nThe distance between rc and c is: " <<d << endl;
+// Using array of Shape pointers:
+    Shape* sh[4];
+    sh[0] = &s;
+    sh[1] = &a;
+    sh [2] = &c;
+    sh [3] = &rc;
+    sh [0]->display();
+    cout << "\nthe area of "<< sh[0]->getName() << " is: "<< sh[0] ->area();
+    cout << "\nthe perimeter of " << sh[0]->getName () << " is: "<< sh[0]->perimeter() << endl;
+    sh [1]->display();
+    cout << "\nthe area of "<< sh[1]->getName() << " is: "<< sh[1] ->area();
+    cout << "\nthe perimeter of " << sh[1]->getName () << " is: "<< sh[1]->perimeter() << endl;
+    sh [2]->display();
+    cout << "\nthe area of "<< sh[2]->getName() << " is: "<< sh[2] ->area();
+    cout << "\nthe circumference of " << sh[2]->getName ()<< " is: "<< sh[2]->perimeter() << endl;
+    sh [3]->display();
+//    cout << "\nthe area of "<< sh[3]->getName() << "is: "<< sh[3] ->area();
+//    cout << "\nthe perimeter of " << sh[3]->getName () << " is: "<< sh[3]->perimeter();
+//    cout << "\nTesting copy constructor in class CornerCut:" <<endl;
+//    CornerCut cc = rc;
+//    cc.display();
+//    cout << "\nTesting assignment operator in class CornerCut:" <<endl;
+//    CornerCut cc2(2, 5, 100, 12, 9, "CornerCut cc2");
+//    cc2.display();
+//    cc2 = cc;
+//    cc2.display();
+
 }
 
 int main() {
