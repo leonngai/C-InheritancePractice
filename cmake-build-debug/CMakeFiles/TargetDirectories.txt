@@ -1,0 +1,3 @@
+/Users/Leon/CLionProjects/ENSF_Project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/Leon/CLionProjects/ENSF_Project/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/Leon/CLionProjects/ENSF_Project/cmake-build-debug/CMakeFiles/ENSF_Project.dir

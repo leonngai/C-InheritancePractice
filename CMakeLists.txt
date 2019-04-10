@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.13)
-project(Project)
+project(ENSF_Project)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Project Part1.cpp Part1.h)
+add_executable(ENSF_Project main.cpp)
